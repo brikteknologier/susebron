@@ -13,6 +13,7 @@ that uses variables to define the colours
 
 ```javascript
 var susebron = require('susebron');
+var stylus = require('stylus');
 var myStylus = "body { background-color: dark_col }";
 var style = {
   defs: {
@@ -20,7 +21,7 @@ var style = {
     dark_col: "#000"
   }
 };
-stylus(myAmazingStyleString).use(susebron(style)).render()
+var css = stylus(myStylus).use(susebron(style)).render()
 ```
 
 ## install
