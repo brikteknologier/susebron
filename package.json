@@ -1,0 +1,16 @@
+{
+  "name": "susebron",
+  "version": "0.1.0",
+  "description": "color scheme stylus middleware",
+  "main": "susebron.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://www.github.com/brikteknologier/susebron"
+  },
+  "author": "",
+  "license": "MIT",
+  "gitHead": "b1ecdc12147a88b554cf954875ab621407da7971"
+}
