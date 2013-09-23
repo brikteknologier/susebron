@@ -41,3 +41,14 @@ can have the following keys:
 * `defs` (required): an object with a set of variable definitions. this is where
   you should define your colours.
 
+## limitations
+
+Susebron doesn't parse any stylus, so you can't use stylus expressions in your
+defs. This module was primarily intended as a place to define colourschemes, in
+a way that isn't tightly coupled to stylus (because if we do that, then there's
+not point in not just prepending a .styl file). So sadly, you can't do something
+like `"nav-color": "darken(header-color, 25%)"`, as nice as that would be.
+
+## running tests
+
+Clone the module, run `npm install` then `mocha -R spec` to run tests.
