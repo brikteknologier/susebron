@@ -11,7 +11,7 @@ module.exports = function susebron(scheme) {
     if (scheme.light) {
       style.str = [ "_lighten = lighten",
                     "lighten = darken",
-                    "darken = _lighten" ].join('\n') + style.str;
+                    "darken = _lighten" ].join('\n') + '\n' + style.str;
     }
     if (scheme.prepend) style.str = scheme.prepend + style.str;
 

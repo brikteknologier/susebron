@@ -80,4 +80,12 @@ describe('susebron', function() {
     assert(!res.match(/\$potato/));
     done();
   });
+  it('should switch lighten and darken for light templates', function() {
+    var stystr = 'body { color: lighten(#fff, 100%) }';
+    var res = stylus(stystr)
+                .use(su({ light: true, defs: {  } }))
+                .render();
+    assert(!res.match(/#fff/));
+    assert(res.match(/#000/));
+  });
 });
