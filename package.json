@@ -15,5 +15,8 @@
   "gitHead": "b1ecdc12147a88b554cf954875ab621407da7971",
   "devDependencies": {
     "mocha": "~1.13.0"
+  },
+  "dependencies": {
+    "stylus": "~0.37.0"
   }
 }
