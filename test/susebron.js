@@ -88,4 +88,13 @@ describe('susebron', function() {
     assert(!res.match(/#fff/));
     assert(res.match(/#000/));
   });
+  it('should evaluate values properly', function() {
+    var stystr = 'body { color: darken(#fff, $amount) }';
+    var res = stylus(stystr)
+                .use(su({ defs: { '$amount': 100 } }))
+                .render();
+    console.log(res);
+    assert(!res.match(/#fff/));
+    assert(res.match(/#000/));
+  });
 });
