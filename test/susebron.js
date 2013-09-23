@@ -96,4 +96,11 @@ describe('susebron', function() {
     assert(!res.match(/#fff/));
     assert(res.match(/#000/));
   });
+  it('should assume literals when values weren\'t understood', function() {
+    var stystr = 'body { background: $bg }';
+    var res = stylus(stystr)
+                .use(su({ defs: { '$bg': 'url(/amazing/texture.jpg) repeat' } }))
+                .render();
+    assert(res.match(/background: url/));
+  });
 });
