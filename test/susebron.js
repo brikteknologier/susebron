@@ -103,4 +103,8 @@ describe('susebron', function() {
                 .render();
     assert(res.match(/background: url/));
   });
+  it('should expose defs', function() {
+    var sus = su({ defs: { '$bg': '/amazing/thing.jpg' } });
+    assert.equal(sus.defs.$bg, '/amazing/thing.jpg');
+  });
 });
