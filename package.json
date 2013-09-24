@@ -17,6 +17,7 @@
     "mocha": "~1.13.0"
   },
   "dependencies": {
-    "stylus": "~0.37.0"
+    "stylus": "~0.37.0",
+    "underscore": "~1.5.2"
   }
 }

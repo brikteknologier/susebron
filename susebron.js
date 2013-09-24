@@ -2,6 +2,7 @@ var read = require('fs').readFileSync;
 var parse = JSON.parse;
 var Lexer = require('stylus/lib/lexer')
 var stylus = require('stylus');
+var _ = require('underscore');
 
 module.exports = function susebron(scheme) {
   // Have to do this synchronously because Stylus doesn't allow asynchronous
@@ -25,7 +26,7 @@ module.exports = function susebron(scheme) {
     return def;
   });
      
-  return function susebronWare(style) {
+  function susebronWare(style) {
     if (scheme.light) {
       style.str = [ "_lighten = lighten",
                     "lighten = darken",
@@ -33,9 +34,12 @@ module.exports = function susebron(scheme) {
     }
     if (scheme.prepend) style.str = scheme.prepend + style.str;
 
-
     defs.forEach(function(def) {
       style.define(def.key, def.val);
     });
   };
+
+  _.extend(susebronWare, scheme);
+  
+  return susebronWare;
 };
