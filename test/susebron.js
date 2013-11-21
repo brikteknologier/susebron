@@ -105,6 +105,18 @@ describe('susebron', function() {
   });
   it('should expose defs', function() {
     var sus = su({ defs: { '$bg': '/amazing/thing.jpg' } });
-    assert.equal(sus.defs.$bg, '/amazing/thing.jpg');
+    assert.equal(sus.scheme.defs.$bg, '/amazing/thing.jpg');
+  });
+  it('should recompute values every time if requested', function(done) {
+    var stystr = 'body { font-family: $potato }';
+    var mw = su({ defs: { '$potato': 'Amazing' } }, true);
+    var res = stylus(stystr).use(mw).render();
+    
+    assert(res.match(/Amazing/));
+    mw.scheme.defs.$potato = 'Stuff';
+    res = stylus(stystr).use(mw).render();
+    assert(res.match(/Stuff/));
+    assert(!res.match(/Amazing/));
+    done();
   });
 });
