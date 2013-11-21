@@ -4,12 +4,7 @@ var Lexer = require('stylus/lib/lexer')
 var stylus = require('stylus');
 var _ = require('underscore');
 
-module.exports = function susebron(scheme) {
-  // Have to do this synchronously because Stylus doesn't allow asynchronous
-  // middleware, and it would be a pain in the ass to have to wait to get the
-  // middleware.
-  if ('string' == typeof scheme) scheme = parse(read(scheme));
-
+function compile(scheme) {
   var defs = [];
   for (var key in scheme.defs) 
     defs.push({ key: key, val: scheme.defs[key] });
@@ -25,8 +20,19 @@ module.exports = function susebron(scheme) {
       def.val = new stylus.nodes.Literal(def.val);
     return def;
   });
-     
+  return defs;
+}
+module.exports = function susebron(scheme, recompileEveryTime) {
+  // Have to do this synchronously because Stylus doesn't allow asynchronous
+  // middleware, and it would be a pain in the ass to have to wait to get the
+  // middleware.
+  if ('string' == typeof scheme) scheme = parse(read(scheme));
+
+  var defs = compile(scheme);
+
   function susebronWare(style) {
+    var scheme = susebronWare.scheme;
+    if (recompileEveryTime) defs = compile(scheme);
     if (scheme.light) {
       style.str = [ "_lighten = lighten",
                     "lighten = darken",
@@ -39,7 +45,7 @@ module.exports = function susebron(scheme) {
     });
   };
 
-  _.extend(susebronWare, scheme);
+  susebronWare.scheme = scheme;
   
   return susebronWare;
 };
